@@ -12,18 +12,15 @@ const student = new mongoose.Schema({
 
 });
 
-const Student = mongoose.model('student',student);
+const Student = new mongoose.model('student',student);
 
 connect()
  .then(async connection =>{
 
-    console.log('test');
 
-    const newStudent = await Student.create({firstName: '007 Bond'});
-
-
-    
-    console.log(newStudent);
+    let student = await Student.create({firstName: 'ken master'});
+ 
+    console.log(student);
 
  })
  .catch(e =>{
