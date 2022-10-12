@@ -8,7 +8,7 @@ connect = () =>{
 }
 
 const student = new mongoose.Schema({
-    firstName: String,
+    //firstName: String,
     // if your want to add more metadate
    firstname: {
       type: String,
@@ -47,9 +47,22 @@ connect()
  .then(async connection =>{
 
 
-    let student = await Student.create({firstName: 'Ryu'});
+   //  let student = await Student.create({firstName: 'Ryu'});
  
-    console.log(student);
+   //  console.log(student);
+
+   const addSchool =  await School.create({name: 'MIT'});
+
+   const newStudent = await Student.create({
+      firstname: 'Paul', 
+      school: addSchool._id,
+   })
+
+   const match = await Student.findById(student.id)
+      .populate('school')
+      .exec()
+
+   console.log(match);
 
  })
  .catch(e =>{
