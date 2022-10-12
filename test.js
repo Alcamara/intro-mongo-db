@@ -9,16 +9,45 @@ connect = () =>{
 
 const student = new mongoose.Schema({
     firstName: String,
+    // if your want to add more metadate
+   firstname: {
+      type: String,
+      // validation
+      required: true,
+      // index
+      unique: true
+   },
 
-});
+   faveFoods: [{type: string}],
+   info: {
+      school:{
+         type: string
+      },
+      showSize: {
+         type: Number
+      }
+   },
 
-const Student = new mongoose.model('student',student);
+   school: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'school'
+   }
+
+},{timestamps: true});
+
+const school = new mongoose.Schema({
+   name: String
+})
+
+const School = mongoose.model('school',school);
+const Student = mongoose.model('student',student);
 
 connect()
  .then(async connection =>{
 
 
-    let student = await Student.create({firstName: 'ken master'});
+    let student = await Student.create({firstName: 'Ryu'});
  
     console.log(student);
 
